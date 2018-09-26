@@ -15,3 +15,11 @@ return "$url' defer onload='";
 }
 add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
 }
+
+function remove_css_js_ver( $src ) {
+if( strpos( $src, '?ver=' ) )
+$src = remove_query_arg( 'ver', $src );
+return $src;
+}
+add_filter( 'style_loader_src', 'remove_css_js_ver', 10, 2 );
+add_filter( 'script_loader_src', 'remove_css_js_ver', 10, 2 ); 
